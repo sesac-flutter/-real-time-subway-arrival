@@ -20,7 +20,7 @@ SubwayRealTimeInfo _$SubwayRealTimeInfoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SubwayRealTimeInfo {
-  int get subwayId => throw _privateConstructorUsedError;
+  SubwayLine get subwayLine => throw _privateConstructorUsedError;
   String get direction => throw _privateConstructorUsedError;
   String get arrivalMsg => throw _privateConstructorUsedError;
   String get currentStation => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $SubwayRealTimeInfoCopyWith<$Res> {
       _$SubwayRealTimeInfoCopyWithImpl<$Res, SubwayRealTimeInfo>;
   @useResult
   $Res call(
-      {int subwayId,
+      {SubwayLine subwayLine,
       String direction,
       String arrivalMsg,
       String currentStation});
@@ -57,16 +57,16 @@ class _$SubwayRealTimeInfoCopyWithImpl<$Res, $Val extends SubwayRealTimeInfo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? subwayId = null,
+    Object? subwayLine = null,
     Object? direction = null,
     Object? arrivalMsg = null,
     Object? currentStation = null,
   }) {
     return _then(_value.copyWith(
-      subwayId: null == subwayId
-          ? _value.subwayId
-          : subwayId // ignore: cast_nullable_to_non_nullable
-              as int,
+      subwayLine: null == subwayLine
+          ? _value.subwayLine
+          : subwayLine // ignore: cast_nullable_to_non_nullable
+              as SubwayLine,
       direction: null == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
@@ -92,7 +92,7 @@ abstract class _$$SubwayRealTimeInfoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int subwayId,
+      {SubwayLine subwayLine,
       String direction,
       String arrivalMsg,
       String currentStation});
@@ -109,16 +109,16 @@ class __$$SubwayRealTimeInfoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? subwayId = null,
+    Object? subwayLine = null,
     Object? direction = null,
     Object? arrivalMsg = null,
     Object? currentStation = null,
   }) {
     return _then(_$SubwayRealTimeInfoImpl(
-      subwayId: null == subwayId
-          ? _value.subwayId
-          : subwayId // ignore: cast_nullable_to_non_nullable
-              as int,
+      subwayLine: null == subwayLine
+          ? _value.subwayLine
+          : subwayLine // ignore: cast_nullable_to_non_nullable
+              as SubwayLine,
       direction: null == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
@@ -139,7 +139,7 @@ class __$$SubwayRealTimeInfoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SubwayRealTimeInfoImpl implements _SubwayRealTimeInfo {
   const _$SubwayRealTimeInfoImpl(
-      {required this.subwayId,
+      {required this.subwayLine,
       required this.direction,
       required this.arrivalMsg,
       required this.currentStation});
@@ -148,7 +148,7 @@ class _$SubwayRealTimeInfoImpl implements _SubwayRealTimeInfo {
       _$$SubwayRealTimeInfoImplFromJson(json);
 
   @override
-  final int subwayId;
+  final SubwayLine subwayLine;
   @override
   final String direction;
   @override
@@ -158,7 +158,7 @@ class _$SubwayRealTimeInfoImpl implements _SubwayRealTimeInfo {
 
   @override
   String toString() {
-    return 'SubwayRealTimeInfo(subwayId: $subwayId, direction: $direction, arrivalMsg: $arrivalMsg, currentStation: $currentStation)';
+    return 'SubwayRealTimeInfo(subwayLine: $subwayLine, direction: $direction, arrivalMsg: $arrivalMsg, currentStation: $currentStation)';
   }
 
   @override
@@ -166,8 +166,8 @@ class _$SubwayRealTimeInfoImpl implements _SubwayRealTimeInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SubwayRealTimeInfoImpl &&
-            (identical(other.subwayId, subwayId) ||
-                other.subwayId == subwayId) &&
+            (identical(other.subwayLine, subwayLine) ||
+                other.subwayLine == subwayLine) &&
             (identical(other.direction, direction) ||
                 other.direction == direction) &&
             (identical(other.arrivalMsg, arrivalMsg) ||
@@ -178,8 +178,8 @@ class _$SubwayRealTimeInfoImpl implements _SubwayRealTimeInfo {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, subwayId, direction, arrivalMsg, currentStation);
+  int get hashCode => Object.hash(
+      runtimeType, subwayLine, direction, arrivalMsg, currentStation);
 
   @JsonKey(ignore: true)
   @override
@@ -198,7 +198,7 @@ class _$SubwayRealTimeInfoImpl implements _SubwayRealTimeInfo {
 
 abstract class _SubwayRealTimeInfo implements SubwayRealTimeInfo {
   const factory _SubwayRealTimeInfo(
-      {required final int subwayId,
+      {required final SubwayLine subwayLine,
       required final String direction,
       required final String arrivalMsg,
       required final String currentStation}) = _$SubwayRealTimeInfoImpl;
@@ -207,7 +207,7 @@ abstract class _SubwayRealTimeInfo implements SubwayRealTimeInfo {
       _$SubwayRealTimeInfoImpl.fromJson;
 
   @override
-  int get subwayId;
+  SubwayLine get subwayLine;
   @override
   String get direction;
   @override

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:real_time_subway/domain/enum/subway_line.dart';
 
 part 'subway_real_time_info.freezed.dart';
 part 'subway_real_time_info.g.dart';
@@ -6,7 +7,7 @@ part 'subway_real_time_info.g.dart';
 @freezed
 class SubwayRealTimeInfo with _$SubwayRealTimeInfo {
   const factory SubwayRealTimeInfo({
-    required int subwayId,
+    required SubwayLine subwayLine,
     required String direction,
     required String arrivalMsg,
     required String currentStation,
@@ -15,3 +16,5 @@ class SubwayRealTimeInfo with _$SubwayRealTimeInfo {
   factory SubwayRealTimeInfo.fromJson(Map<String, Object?> json) =>
       _$SubwayRealTimeInfoFromJson(json);
 }
+
+
