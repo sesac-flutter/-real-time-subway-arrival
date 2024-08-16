@@ -1,72 +1,203 @@
 import 'dart:convert';
 import 'package:real_time_subway/data/api/subway_api.dart';
+import 'package:real_time_subway/data/dto/subway_real_time_info_dto/subway_real_time_info_dto.dart';
 
 class MockSubwayApi implements SubwayApi {
   @override
-  Future<List<Map<String, dynamic>>> getRealTimeSubwayInfo(
-      String station) async {
+  Future<SubwayRealTimeInfoDto> getRealTimeSubwayInfo(String station) async {
     await Future.delayed(const Duration(seconds: 2));
 
     String? jsonData;
-    switch (station) {
-      case '강남구청':
-        jsonData = data1;
-        break;
-      case '홍대입구':
-        jsonData = data2;
-        break;
-      default:
-        return [];
+    if (station == '강남구청') {
+      jsonData = data1;
+    } else if (station == '홍대입구') {
+      jsonData = data2;
+    } else {
+      throw Exception('요청 데이터 없음');
     }
 
-    final data = jsonDecode(jsonData);
-    return List<Map<String, dynamic>>.from(data['realtimeArrivalList']);
+    final data = jsonDecode(jsonData) as Map<String, dynamic>;
+    final dto = SubwayRealTimeInfoDto.fromJson(data);
+    return dto;
   }
 }
 
 // Mock JSON 데이터
 const String data1 = '''
 {
+  "errorMessage": {
+    "status": 200,
+    "code": "INFO-000",
+    "message": "정상 처리되었습니다.",
+    "link": "",
+    "developerMessage": "",
+    "total": 8
+  },
   "realtimeArrivalList": [
     {
+      "beginRow": null,
+      "endRow": null,
+      "curPage": null,
+      "pageRow": null,
+      "totalCount": 8,
+      "rowNum": 1,
+      "selectedCount": 5,
+      "subwayId": "1075",
+      "subwayNm": null,
+      "updnLine": "상행",
+      "trainLineNm": "왕십리행 - 압구정로데오방면",
+      "subwayHeading": null,
+      "statnFid": "1075075214",
+      "statnTid": "1075075212",
+      "statnId": "1075075213",
+      "statnNm": "강남구청",
+      "trainCo": null,
+      "trnsitCo": "2",
+      "ordkey": "01000왕십리0",
+      "subwayList": "1007,1075",
+      "statnList": "1007000730,1075075213",
+      "btrainSttus": "일반",
+      "barvlDt": "0",
+      "btrainNo": "6134",
+      "bstatnId": "165",
+      "bstatnNm": "왕십리",
+      "recptnDt": "2024-08-16 16:53:14",
+      "arvlMsg2": "강남구청 도착",
+      "arvlMsg3": "강남구청",
+      "arvlCd": "1",
+      "lstcarAt": "0"
+    },
+    {
+      "beginRow": null,
+      "endRow": null,
+      "curPage": null,
+      "pageRow": null,
+      "totalCount": 8,
+      "rowNum": 2,
+      "selectedCount": 5,
       "subwayId": "1007",
+      "subwayNm": null,
       "updnLine": "상행",
       "trainLineNm": "도봉산행 - 청담방면",
+      "subwayHeading": null,
+      "statnFid": "1007000731",
+      "statnTid": "1007000729",
+      "statnId": "1007000730",
       "statnNm": "강남구청",
-      "arvlMsg2": "강남구청 도착",
-      "arvlMsg3": "강남구청"
+      "trainCo": null,
+      "trnsitCo": "2",
+      "ordkey": "01003도봉산0",
+      "subwayList": "1007,1075",
+      "statnList": "1007000730,1075075213",
+      "btrainSttus": "일반",
+      "barvlDt": "300",
+      "btrainNo": "7246",
+      "bstatnId": "2",
+      "bstatnNm": "도봉산",
+      "recptnDt": "2024-08-16 16:53:42",
+      "arvlMsg2": "5분 후 (반포)",
+      "arvlMsg3": "반포",
+      "arvlCd": "99",
+      "lstcarAt": "0"
     },
     {
+      "beginRow": null,
+      "endRow": null,
+      "curPage": null,
+      "pageRow": null,
+      "totalCount": 8,
+      "rowNum": 3,
+      "selectedCount": 5,
       "subwayId": "1075",
+      "subwayNm": null,
       "updnLine": "상행",
       "trainLineNm": "왕십리행 - 압구정로데오방면",
+      "subwayHeading": null,
+      "statnFid": "1075075214",
+      "statnTid": "1075075212",
+      "statnId": "1075075213",
       "statnNm": "강남구청",
-      "arvlMsg2": "[3]번째 전역 (한티)",
-      "arvlMsg3": "한티"
+      "trainCo": null,
+      "trnsitCo": "2",
+      "ordkey": "02004왕십리0",
+      "subwayList": "1007,1075",
+      "statnList": "1007000730,1075075213",
+      "btrainSttus": "일반",
+      "barvlDt": "0",
+      "btrainNo": "6558",
+      "bstatnId": "165",
+      "bstatnNm": "왕십리",
+      "recptnDt": "2024-08-16 16:53:14",
+      "arvlMsg2": "[4]번째 전역 (도곡)",
+      "arvlMsg3": "도곡",
+      "arvlCd": "99",
+      "lstcarAt": "0"
     },
     {
+      "beginRow": null,
+      "endRow": null,
+      "curPage": null,
+      "pageRow": null,
+      "totalCount": 8,
+      "rowNum": 4,
+      "selectedCount": 5,
       "subwayId": "1007",
+      "subwayNm": null,
       "updnLine": "상행",
       "trainLineNm": "장암행 - 청담방면",
+      "subwayHeading": null,
+      "statnFid": "1007000731",
+      "statnTid": "1007000729",
+      "statnId": "1007000730",
       "statnNm": "강남구청",
-      "arvlMsg2": "5분 후 (반포)",
-      "arvlMsg3": "반포"
+      "trainCo": null,
+      "trnsitCo": "2",
+      "ordkey": "02005장암0",
+      "subwayList": "1007,1075",
+      "statnList": "1007000730,1075075213",
+      "btrainSttus": "일반",
+      "barvlDt": "600",
+      "btrainNo": "7248",
+      "bstatnId": "2",
+      "bstatnNm": "장암",
+      "recptnDt": "2024-08-16 16:53:42",
+      "arvlMsg2": "10분 후 (내방)",
+      "arvlMsg3": "내방",
+      "arvlCd": "99",
+      "lstcarAt": "0"
     },
     {
+      "beginRow": null,
+      "endRow": null,
+      "curPage": null,
+      "pageRow": null,
+      "totalCount": 8,
+      "rowNum": 5,
+      "selectedCount": 5,
       "subwayId": "1075",
-      "updnLine": "상행",
-      "trainLineNm": "왕십리행 - 압구정로데오방면",
-      "statnNm": "강남구청",
-      "arvlMsg2": "[7]번째 전역 (대모산입구)",
-      "arvlMsg3": "대모산입구"
-    },
-    {
-      "subwayId": "1075",
+      "subwayNm": null,
       "updnLine": "하행",
-      "trainLineNm": "죽전행 - 선정릉방면",
+      "trainLineNm": "고색행 - 선정릉방면",
+      "subwayHeading": null,
+      "statnFid": "1075075212",
+      "statnTid": "1075075214",
+      "statnId": "1075075213",
       "statnNm": "강남구청",
+      "trainCo": null,
+      "trnsitCo": "2",
+      "ordkey": "11000고색0",
+      "subwayList": "1007,1075",
+      "statnList": "1007000730,1075075213",
+      "btrainSttus": "일반",
+      "barvlDt": "0",
+      "btrainNo": "6159",
+      "bstatnId": "288",
+      "bstatnNm": "고색",
+      "recptnDt": "2024-08-16 16:52:59",
       "arvlMsg2": "강남구청 도착",
-      "arvlMsg3": "강남구청"
+      "arvlMsg3": "강남구청",
+      "arvlCd": "1",
+      "lstcarAt": "0"
     }
   ]
 }
@@ -74,46 +205,179 @@ const String data1 = '''
 
 const String data2 = '''
 {
+  "errorMessage": {
+    "status": 200,
+    "code": "INFO-000",
+    "message": "정상 처리되었습니다.",
+    "link": "",
+    "developerMessage": "",
+    "total": 10
+  },
   "realtimeArrivalList": [
     {
+      "beginRow": null,
+      "endRow": null,
+      "curPage": null,
+      "pageRow": null,
+      "totalCount": 10,
+      "rowNum": 1,
+      "selectedCount": 5,
       "subwayId": "1065",
-      "updnLine": "상행",
-      "trainLineNm": "인천공항2터미널행 - 디지털미디어시티방면 (급행)",
-      "statnNm": "홍대입구",
-      "arvlMsg2": "홍대입구 출발",
-      "arvlMsg3": "홍대입구"
-    },
-    {
-      "subwayId": "1065",
-      "updnLine": "상행",
-      "trainLineNm": "검암행 - 디지털미디어시티방면",
-      "statnNm": "홍대입구",
-      "arvlMsg2": "전역 출발",
-      "arvlMsg3": "공덕"
-    },
-    {
-      "subwayId": "1063",
-      "updnLine": "상행",
-      "trainLineNm": "문산행 - 가좌방면",
-      "statnNm": "홍대입구",
-      "arvlMsg2": "전역 진입",
-      "arvlMsg3": "서강대"
-    },
-    {
-      "subwayId": "1065",
+      "subwayNm": null,
       "updnLine": "상행",
       "trainLineNm": "인천공항2터미널행 - 디지털미디어시티방면",
+      "subwayHeading": null,
+      "statnFid": "1065006504",
+      "statnTid": "1065006502",
+      "statnId": "1065006503",
       "statnNm": "홍대입구",
-      "arvlMsg2": "[2]번째 전역 (서울)",
-      "arvlMsg3": "서울"
+      "trainCo": null,
+      "trnsitCo": "3",
+      "ordkey": "01000인천공항2터미널0",
+      "subwayList": "1002,1063,1065",
+      "statnList": "1002000239,1063075314,1065006503",
+      "btrainSttus": "일반",
+      "barvlDt": "0",
+      "btrainNo": "A2117",
+      "bstatnId": "110",
+      "bstatnNm": "인천공항2터미널",
+      "recptnDt": "2024-08-16 16:48:22",
+      "arvlMsg2": "홍대입구 출발",
+      "arvlMsg3": "홍대입구",
+      "arvlCd": "2",
+      "lstcarAt": "0"
     },
     {
+      "beginRow": null,
+      "endRow": null,
+      "curPage": null,
+      "pageRow": null,
+      "totalCount": 10,
+      "rowNum": 2,
+      "selectedCount": 5,
       "subwayId": "1063",
+      "subwayNm": null,
       "updnLine": "상행",
       "trainLineNm": "문산행 - 가좌방면",
+      "subwayHeading": null,
+      "statnFid": "1063075313",
+      "statnTid": "1063075315",
+      "statnId": "1063075314",
       "statnNm": "홍대입구",
-      "arvlMsg2": "[7]번째 전역 (한남)",
-      "arvlMsg3": "한남"
+      "trainCo": null,
+      "trnsitCo": "3",
+      "ordkey": "01001문산0",
+      "subwayList": "1002,1063,1065",
+      "statnList": "1002000239,1063075314,1065006503",
+      "btrainSttus": "일반",
+      "barvlDt": "0",
+      "btrainNo": "5096",
+      "bstatnId": "234",
+      "bstatnNm": "문산",
+      "recptnDt": "2024-08-16 16:50:51",
+      "arvlMsg2": "전역 도착",
+      "arvlMsg3": "서강대",
+      "arvlCd": "5",
+      "lstcarAt": "0"
+    },
+    {
+      "beginRow": null,
+      "endRow": null,
+      "curPage": null,
+      "pageRow": null,
+      "totalCount": 10,
+      "rowNum": 3,
+      "selectedCount": 5,
+      "subwayId": "1065",
+      "subwayNm": null,
+      "updnLine": "상행",
+      "trainLineNm": "인천공항2터미널행 - 디지털미디어시티방면 (급행)",
+      "subwayHeading": null,
+      "statnFid": "1065006504",
+      "statnTid": "1065006502",
+      "statnId": "1065006503",
+      "statnNm": "홍대입구",
+      "trainCo": null,
+      "trnsitCo": "3",
+      "ordkey": "01002인천공항2터미널1",
+      "subwayList": "1002,1063,1065",
+      "statnList": "1002000239,1063075314,1065006503",
+      "btrainSttus": "급행",
+      "barvlDt": "0",
+      "btrainNo": "A1033",
+      "bstatnId": "110",
+      "bstatnNm": "인천공항2터미널 (급행)",
+      "recptnDt": "2024-08-16 16:50:25",
+      "arvlMsg2": "[2]번째 전역 (서울)",
+      "arvlMsg3": "서울",
+      "arvlCd": "99",
+      "lstcarAt": "0"
+    },
+    {
+      "beginRow": null,
+      "endRow": null,
+      "curPage": null,
+      "pageRow": null,
+      "totalCount": 10,
+      "rowNum": 4,
+      "selectedCount": 5,
+      "subwayId": "1065",
+      "subwayNm": null,
+      "updnLine": "상행",
+      "trainLineNm": "검암행 - 디지털미디어시티방면",
+      "subwayHeading": null,
+      "statnFid": "1065006504",
+      "statnTid": "1065006502",
+      "statnId": "1065006503",
+      "statnNm": "홍대입구",
+      "trainCo": null,
+      "trnsitCo": "3",
+      "ordkey": "02002검암0",
+      "subwayList": "1002,1063,1065",
+      "statnList": "1002000239,1063075314,1065006503",
+      "btrainSttus": "일반",
+      "barvlDt": "0",
+      "btrainNo": "A3073",
+      "bstatnId": "110",
+      "bstatnNm": "검암",
+      "recptnDt": "2024-08-16 16:48:22",
+      "arvlMsg2": "[2]번째 전역 (서울)",
+      "arvlMsg3": "서울",
+      "arvlCd": "99",
+      "lstcarAt": "0"
+    },
+    {
+      "beginRow": null,
+      "endRow": null,
+      "curPage": null,
+      "pageRow": null,
+      "totalCount": 10,
+      "rowNum": 5,
+      "selectedCount": 5,
+      "subwayId": "1063",
+      "subwayNm": null,
+      "updnLine": "상행",
+      "trainLineNm": "문산행 - 가좌방면",
+      "subwayHeading": null,
+      "statnFid": "1063075313",
+      "statnTid": "1063075315",
+      "statnId": "1063075314",
+      "statnNm": "홍대입구",
+      "trainCo": null,
+      "trnsitCo": "3",
+      "ordkey": "02005문산0",
+      "subwayList": "1002,1063,1065",
+      "statnList": "1002000239,1063075314,1065006503",
+      "btrainSttus": "일반",
+      "barvlDt": "0",
+      "btrainNo": "5098",
+      "bstatnId": "234",
+      "bstatnNm": "문산",
+      "recptnDt": "2024-08-16 16:50:51",
+      "arvlMsg2": "[5]번째 전역 (이촌)",
+      "arvlMsg3": "이촌",
+      "arvlCd": "99",
+      "lstcarAt": "0"
     }
   ]
 }
