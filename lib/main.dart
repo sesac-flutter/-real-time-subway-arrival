@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:real_time_subway/app.dart';
+import 'package:real_time_subway/presentation/subway/subway_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const SubwayScreen());
 }
 
