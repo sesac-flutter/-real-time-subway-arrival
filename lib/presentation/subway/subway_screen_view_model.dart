@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'package:real_time_subway/data/repository/subway_repository_impl.dart';
+import 'package:real_time_subway/domain/repository/subway_repository.dart';
 import 'package:real_time_subway/presentation/subway/subway_screen_ui_state.dart';
 
 class SubwayScreenViewModel with ChangeNotifier {
-  final SubwayRepositoryImpl _subwayRepository;
+  final SubwayRepository _subwayRepository;
 
   SubwayScreenViewModel(this._subwayRepository);
 
