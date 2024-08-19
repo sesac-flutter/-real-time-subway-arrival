@@ -16,5 +16,3 @@ class SubwayRealTimeInfo with _$SubwayRealTimeInfo {
   factory SubwayRealTimeInfo.fromJson(Map<String, Object?> json) =>
       _$SubwayRealTimeInfoFromJson(json);
 }
-
-
