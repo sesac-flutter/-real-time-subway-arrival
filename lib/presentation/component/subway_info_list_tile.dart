@@ -16,10 +16,25 @@ class SubwayInfoListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Text(subwayLine),
-      title: Text(direction),
-      subtitle: Text('$arrivalMsg ($currentStation)'),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            subwayLine,
+            style: const TextStyle(fontSize: 20),
+          ),
+          Text(
+            direction,
+            style: const TextStyle(fontSize: 20),
+          ),
+          Text(
+            arrivalMsg.replaceAll('[', '').replaceAll(']', ''),
+            style: const TextStyle(fontSize: 20),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:real_time_subway/presentation/component/custom_search_bar.dart';
 import 'package:real_time_subway/presentation/component/subway_info_list_tile.dart';
+import 'package:real_time_subway/presentation/subway/subway_screen_view_model.dart';
 
 class SubwayScreen extends StatefulWidget {
   const SubwayScreen({super.key});
@@ -14,6 +16,8 @@ class _SubwayScreenState extends State<SubwayScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<SubwayScreenViewModel>();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -26,20 +30,25 @@ class _SubwayScreenState extends State<SubwayScreen> {
           children: [
             CustomSearchBar(
               textEditingController: _textEditingController,
-              onSearch: (keyword) {},
+              onSearch: (keyword) {
+                viewModel.getSubwayInfos(keyword);
+              },
             ),
-            SizedBox(
-              height: 150,
-              child: ListView(
-                children: [
-                  SubwayInfoListTile(
-                    subwayLine: '3',
-                    direction: 'ㅇㅇ행',
-                    arrivalMsg: 'ㅇㅇ후 도착',
-                    currentStation: 'ㅇㅇ역',
-                  ),
-                ],
-              ),
+            Expanded(
+              child: viewModel.state.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView(
+                      children: viewModel.state.subwayInfos
+                          .map(
+                            (subway) => SubwayInfoListTile(
+                              subwayLine: subway.subwayLine.name,
+                              direction: subway.direction,
+                              arrivalMsg: subway.arrivalMsg,
+                              currentStation: subway.currentStation,
+                            ),
+                          )
+                          .toList(),
+                    ),
             ),
           ],
         ),

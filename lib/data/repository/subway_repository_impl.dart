@@ -8,8 +8,8 @@ class SubwayRepositoryImpl implements SubwayRepository {
   final SubwayApi _api;
   SubwayRepositoryImpl(this._api);
   @override
-  Future<List<SubwayRealTimeInfo>> getSubwayInfo(String keyword) async {
-    SubwayRealTimeInfoDto dto = await _api.getRealTimeSubwayInfo(keyword);
+  Future<List<SubwayRealTimeInfo>> getSubwayInfo(String station) async {
+    SubwayRealTimeInfoDto dto = await _api.getRealTimeSubwayInfo(station);
 
     List<SubwayRealTimeInfo> subwayInfoList = dto.realtimeArrivalList
             ?.map((realtimeArrival) => realtimeArrival.toSubwayRealTimeInfo())
