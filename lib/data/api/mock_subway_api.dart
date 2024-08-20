@@ -4,7 +4,7 @@ import 'package:real_time_subway/data/dto/subway_real_time_info_dto/subway_real_
 
 class MockSubwayApi implements SubwayApi {
   @override
-  Future<SubwayRealTimeInfoDto> getRealTimeSubwayInfo(String station) async {
+  Future<SubwayRealTimeInfoDto?> getRealTimeSubwayInfo(String station) async {
     await Future.delayed(const Duration(seconds: 2));
 
     String? jsonData;
