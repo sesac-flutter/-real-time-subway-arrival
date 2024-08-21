@@ -37,18 +37,28 @@ class _SubwayScreenState extends State<SubwayScreen> {
             Expanded(
               child: viewModel.state.isLoading
                   ? const Center(child: CircularProgressIndicator())
-                  : ListView(
-                      children: viewModel.state.subwayInfos
-                          .map(
-                            (subway) => SubwayInfoListTile(
-                              subwayLine: subway.subwayLine.name,
-                              direction: subway.direction,
-                              arrivalMsg: subway.arrivalMsg,
-                              currentStation: subway.currentStation,
-                            ),
-                          )
-                          .toList(),
-                    ),
+                  : (_textEditingController.text.isNotEmpty &&
+                          viewModel.state.subwayInfos.isEmpty)
+                      ? const Center(
+                          child: Text(
+                            '존재하는 역 정보가 없습니다.\n역 이름을 다시 확인해주세요.',
+                            textAlign: TextAlign.center,
+                            style:
+                                TextStyle(fontSize: 16, color: Colors.black54),
+                          ),
+                        )
+                      : ListView(
+                          children: viewModel.state.subwayInfos
+                              .map(
+                                (subway) => SubwayInfoListTile(
+                                  subwayLine: subway.subwayLine.name,
+                                  direction: subway.direction,
+                                  arrivalMsg: subway.arrivalMsg,
+                                  currentStation: subway.currentStation,
+                                ),
+                              )
+                              .toList(),
+                        ),
             ),
           ],
         ),
